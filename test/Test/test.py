@@ -1,13 +1,24 @@
-from selenium import webdriver
 import time
+import unittest
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Chrome("..\drivers\chromedriver.exe")
 driver.set_page_load_timeout(10)
 driver.get("http://automationpractice.com/")
-driver.find_element_by_css_selector('.header_user_info').click()
+SignIn = driver.find_element_by_css_selector('.header_user_info')
+SignIn.click()
 time.sleep(4)
-driver.find_element_by_name("email").send_keys("seleniumisgood@mail.com")
-driver.find_element_by_name("passwd").send_keys("123456")
-driver.find_element_by_css_selector('.icon-lock.left').click()
+Login = driver.find_element_by_name("email")
+Login.send_keys('seleniumisgood@mail.com')
+Password = driver.find_element_by_name("passwd")
+Password.send_keys('123456')
+Enter = driver.find_element_by_css_selector('.icon-lock.left')
+Enter.click()
+assert "Sign out" not in driver.find_elements_by_xpath("//*[@id='header']/div[2]/div/div/nav/div[2]")
 time.sleep(4)
+driver.close()
 
+# driver_new = driver.current_url
+# print('Новая страница: ', driver_new)
+# driver.get(driver_new)
