@@ -15,10 +15,13 @@ Password = driver.find_element_by_name("passwd")
 Password.send_keys('123456')
 Enter = driver.find_element_by_css_selector('.icon-lock.left')
 Enter.click()
-assert "Sign out" not in driver.find_elements_by_xpath("//*[@id='header']/div[2]/div/div/nav/div[2]")
-time.sleep(4)
+element = driver.find_element_by_xpath("//*[@id='header']/div[2]/div/div/nav/div[2]")
+time.sleep(2)
+assert element.text == 'Sign out'
 driver.close()
 
+
+#assert "Sign out" == driver.find_elements_by_xpath("//*[@id='header']/div[2]/div/div/nav/div[2]")
 # driver_new = driver.current_url
 # print('Новая страница: ', driver_new)
 # driver.get(driver_new)
